@@ -2,5 +2,6 @@
   name: 'test',
   location: null,
   ip: '127.0.0.1',
-  age: 10
+  age: 10,
+  favio: 'path/to/icon'
 }
