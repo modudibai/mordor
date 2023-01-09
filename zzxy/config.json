@@ -1,0 +1,175 @@
+{
+  "base": {
+    "version": "0.1.0",
+    "width": 450,
+    "height": 240,
+    "title": "西游助手",
+    "dump": true,
+    "maxAcc": 100,
+    "func": {
+        "scheduler_update": "0x10056CDC0",
+        "luaL_loadbuffer": "0x1004B36B4",
+        "lua_pcall": "0x1004A77AC",
+        "lua_pushcclosure": "0x1004A5D8C",
+        "lua_tolstring": "0x1004A50EC",
+        "lua_isstring": "0x1004A404C",
+        "lua_pushstring": "0x1004A5C98",
+        "lua_setfield": "0x1004A6EF4",
+        "lua_getfield": "0x1004A63EC",
+        "lua_pushvalue": "0x1004A3B2C"
+    },
+    "luaActions": {
+        "changeConfig": "mordor:changeConfig"
+    },
+    "remote": {
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/modudibai/mordor/main/zzxy/remote.luac"
+    },
+    "register": {
+        "url": "https://api.cacher.io/raw/c4eae40e661867c6b358/e44a90f3e20217d2ae01/zzxyso"
+    },
+    "config": {
+        "url": "https://gh-proxy.com/https://raw.githubusercontent.com/modudibai/mordor/main/zzxy/config.json"
+    }
+  },
+  "panels": [
+    {
+      "title": "全局设置",
+      "content": [
+        {
+          "id": "speed",
+          "type": "range",
+          "scope": "global",
+          "title": "全局加速",
+          "desc": "全局加速设置",
+          "defaultValue": 4,
+          "minValue": 1,
+          "maxValue": 10,
+          "label": "x%ld倍速",
+          "labelId": "speedLabel",
+          "action": "setGlobalSpeed"
+        },
+        {
+          "id": "skipBattle",
+          "type": "boolean",
+          "scope": "global",
+          "title": "战斗跳过",
+          "desc": "开启后会跳过所有战斗场景",
+          "defaultValue": false
+        },
+        {
+          "id": "assistantInvisible",
+          "type": "boolean",
+          "scope": "global",
+          "title": "隐藏嫦娥助手",
+          "desc": "打开和关闭自带的嫦娥助手",
+          "defaultValue": false
+        },
+        {
+          "id": "version",
+          "type": "text",
+          "noConfig": true,
+          "title": "助手版本",
+          "desc": "助手版本：0.1.0",
+          "dataSource": "config.base.version"
+        }
+      ]
+    },
+    {
+      "title": "登录辅助",
+      "content": [
+        {
+          "id": "autoAccount",
+          "type": "autoAccount",
+          "scope": "global",
+          "title": "登录辅助",
+          "desc": "账号服务器空格分开，每行1个",
+          "listId": "accountList",
+          "example": "账号1 服务器1\n账号2 服务器2\ntest A123",
+          "buttonLabel": "切号",
+          "actions": {
+              "accAutoRun": {
+                  "func": "daily.accAutoRun"
+              },
+              "getAccIndex": {
+                  "func": "daily.getRunAccIndex"
+              }
+          },
+          "options": [
+              {"id":"accAutoChange", "title":"自动切下一个号", "defaultValue":false},
+              {"id":"accAutoDaily", "title":"自动每日任务", "defaultValue":false},
+              {"id":"accAutoBoss", "title":"自动门派BOSS", "defaultValue":false}
+          ]
+        }
+      ]
+    },
+    {
+      "title": "自动操作",
+      "content": [
+        {
+            "id": "fastAuction",
+            "type": "boolean",
+            "scope": "user",
+            "title": "拍卖抢购",
+            "desc": "自动抢购加入【我的竞拍】里的物品",
+            "defaultValue": false
+        },
+        {
+            "id": "fastFriendsRiot",
+            "type": "boolean",
+            "scope": "user",
+            "title": "巡游祈福",
+            "desc": "自动帮助门派成员巡游祈福",
+            "defaultValue": false
+        },
+        {
+            "id": "fastRedbag",
+            "type": "boolean",
+            "scope": "user",
+            "title": "抢门派红包",
+            "desc": "自动抢门派红包",
+            "defaultValue": false
+        }
+      ]
+    },
+    {
+      "title": "每日任务",
+      "content": [
+        {
+          "id": "dailyButton",
+          "type": "button",
+          "noConfig": true,
+          "scope": "user",
+          "title": "自动每日任务",
+          "desc": "开启自动执行每日任务",
+          "label": "开始",
+          "action": "daily.startTask"
+        },
+        {
+          "id": "dailyLog",
+          "type": "log",
+          "noConfig": true,
+          "scope": "user",
+          "height": 140,
+          "border": true,
+          "defaultValue": "还没有日志耶~",
+          "logSeparator": "\n"
+        }
+      ]
+    },
+    {
+      "title": "调试日志",
+      "content": [
+        {
+          "id": "debugLog",
+          "type": "debugLog",
+          "noConfig": true,
+          "height": 200,
+          "border": true,
+          "scope": "global",
+          "title": "调试日志",
+          "defaultValue": "暂无日志"
+        }
+      ]
+    }
+  ]
+}
